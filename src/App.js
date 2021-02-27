@@ -1,44 +1,23 @@
-import React, { useState } from "react";
-import { Button, FormControl, InputLabel, Input } from "@material-ui/core";
-import Message from './Message'
-import "./App.css";
+import React from 'react'
+import './App.css';
+import Row from './Row';
+import request from './Requests';
+import Banner from './Banner';
 
-function App() {
-  const [input, setInput] = useState("");
-  const [messages, setMessages] = useState(["hello", "hye", "bob", "alice"]);
-
-  console.log(input);
-  console.log(messages);
-  const sendMessage = (event) => {
-    //all the logic to send a message goes here
-    event.preventDefault();
-    setMessages([...messages, input]);
-    setInput("");
-  };
-
+function App()  {
   return (
-    <div className="App-header">
-      <form>
-        <FormControl>
-          <InputLabel htmlFor="my-input">Enter Your message </InputLabel>
-          <Input
-          
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-            />
-            <Button disabled = {!input} onClick={sendMessage} variant="contained" color = "primary" type="submit">Send Message</Button>
-        </FormControl>
-
-      
-     
-      </form>
-
-     { 
-      messages.map( message => (
-        <Message text= {message}/> 
-      ))
-     }
+    <div className="app">
+       <Banner/>
+      <Row title="NETFLIX ORIGINALS" fetchURL = {request.fetchNetflixOriginals} isLargeRow/>
+      <Row title="TRENDING" fetchURL={request.fetchTrending}/>
+      <Row title="Top Rated" fetchURL={request.fetchTopRated}/>
+      <Row title="Action Movies" fetchURL={request.fetchActionMovies}/>
+      <Row title="Comedy Movies" fetchURL={request.fetchComedyMovies}/>
+      <Row title="Horror Movies" fetchURL={request.fetchHorrorMovies}/>
+      <Row title="Romance Movies" fetchURL={request.fetchRomanceMovies}/>
+      <Row title="Documentaries" fetchURL={request.fetchDocumentaries}/>
     </div>
-  );
+  )
 }
+
 export default App;
